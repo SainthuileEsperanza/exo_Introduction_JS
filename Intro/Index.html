@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <title>Exo Intro JS</title>
+  </head>
+  <body>
+    <section>
+      <article>
+
+        <form>
+
+          <label for="nom">Entrez un nom :</label>
+          <input type="text" id="nom" name="nom" required>
+
+          <label for="prenom">Entrez un prénom :</label>
+          <input type="text" id="prenom" name="prenom" required>
+
+          <label for="dateDeNaissance">Entrez une date de naissance :</label>
+          <input type="date" id="dateDeNaissance" name="dateDeNaissance" min="1925" max="2025" required>
+
+          <input type="submit" value="Valider">
+
+        </form>
+
+        <script>
+
+          function calculerAge() {
+            const dateNaissance = document.getElementById("dateDeNaissance").valueAsDate;
+            const aujourdHui = new Date();
+
+            let age = aujourdHui.getFullYear() - dateNaissance.getFullYear();
+            const mois = aujourdHui.getMonth() - dateNaissance.getMonth();
+            const jour = aujourdHui.getDate() - dateNaissance.getDate();
+
+
+            //Vérifie si l'anniversaire est déjà passé et retire 1 an à l'âge calculé
+            // si ce n'est pas le cas (Incrémentation)
+
+            if (mois < 0 || (mois === 0 && jour < 0)) age--;
+
+            return age;
+          }
+
+          document.querySelector("form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const nom = document.getElementById("nom").value;
+            const prenom = document.getElementById("prenom").value;
+            const age = calculerAge();
+
+            alert("Nom : " + nom + "\nPrénom : " + prenom + "\nÂge : " + age);
+          });
+        </script>
+      </article>
+    </section>
+  </body>
+</html>
